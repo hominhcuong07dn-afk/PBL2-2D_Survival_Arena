@@ -1,0 +1,22 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "D:\\Download\\PBL2 - 2D Survival Arena\\PBL2 - 2D Survival Arena\\build\\x64\\Release\\microsoft\\STL\\std.obj",
+            "outputs": [
+                "D:\\Download\\PBL2 - 2D Survival Arena\\PBL2 - 2D Survival Arena\\build\\x64\\Release\\microsoft\\STL\\std.ixx.ifc.dt.module.json",
+                "D:\\Download\\PBL2 - 2D Survival Arena\\PBL2 - 2D Survival Arena\\build\\x64\\Release\\microsoft\\STL\\std.ixx.ifc.dt.d.json",
+                "D:\\Download\\PBL2 - 2D Survival Arena\\PBL2 - 2D Survival Arena\\build\\x64\\Release\\microsoft\\STL\\std.ifc"
+            ],
+            "provides": [
+                {
+                    "logical-name": "std",
+                    "source-path": "c:\\program files\\microsoft visual studio\\18\\community\\vc\\tools\\msvc\\14.51.36231\\modules\\std.ixx",
+                    "is-interface": true
+                }
+            ],
+            "requires": []
+        }
+    ]
+}

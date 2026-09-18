@@ -1,0 +1,22 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "x64\\Release\\Player.obj",
+            "outputs": [
+                "x64\\Release\\Player.h_91DE0DE321DC5F8C.ifc.dt.module.json",
+                "x64\\Release\\Player.h_91DE0DE321DC5F8C.ifc.dt.d.json",
+                "x64\\Release\\Player.h.ifc"
+            ],
+            "provides": [
+                {
+                    "logical-name": "D:\\Download\\PBL2 - 2D Survival Arena\\PBL2 - 2D Survival Arena\\Player.h",
+                    "source-path": "d:\\download\\pbl2 - 2d survival arena\\pbl2 - 2d survival arena\\player.h",
+                    "lookup-method": "absolute"
+                }
+            ],
+            "requires": []
+        }
+    ]
+}

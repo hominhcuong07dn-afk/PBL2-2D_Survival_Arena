@@ -1,0 +1,675 @@
+GAME 2D SURVIVAL ARENA - COMBAT & WAVE INFO
+Reference: Minecraft Java Raid - Hard
+Game scale: PLAYER DEFAULT = 20 HP
+Purpose: Design reference for PBL 2D Survival Arena
+
+============================================================
+1. GLOBAL GAME RULES
+============================================================
+
+Player default HP:
+- Max HP: 20
+- 1 heart = 2 HP
+- Starting HP: 20
+
+Recommended combat scale:
+- All enemy HP/damage below are scaled from Minecraft-style ratios,
+  but adjusted for a 20 HP player and a 2D Survival Arena.
+- These values are DESIGN VALUES, not a literal copy of Minecraft
+  internal combat calculations.
+
+Core systems:
+- Player
+- Enemy
+- Combat
+- Weapon
+- Skill
+- Inventory
+- Item
+- Wave/Spawn
+- Boss
+- Map
+- Camera
+- Collision
+- Score
+- Timer
+- Shop
+- Save/Load
+- Menu
+- Pause
+- Game Over
+
+============================================================
+2. PLAYER
+============================================================
+
+PLAYER BASE STATS
+- Max HP: 20
+- Starting HP: 20
+- Movement Speed: 100% (base)
+- Attack: determined by equipped weapon
+- Defense: determined by armor/items
+- Critical Hit: optional
+- Knockback Resistance: optional
+- Invincibility after taking damage: recommended 0.3-0.5 sec
+
+PLAYER COMBAT
+- Basic attack
+- Weapon attack
+- Skill attack
+- Dodge / movement
+- Pickup items
+- Potion/consumable use
+
+Recommended damage feedback:
+- Flash player sprite when hit
+- Show floating damage number
+- Play hit sound
+- Small knockback
+- Brief invulnerability frame
+
+============================================================
+3. ENEMY ROLE SYSTEM
+============================================================
+
+Enemy roles:
+
+1. BASIC
+   - Simple melee enemy
+   - Low HP
+   - Low damage
+   - Main purpose: pressure player
+
+2. RANGED
+   - Attacks from distance
+   - Low/medium HP
+   - Forces player to move
+
+3. MELEE DPS
+   - High contact damage
+   - Medium HP
+   - Main threat when close
+
+4. TANK
+   - Very high HP
+   - High damage
+   - Slow
+   - Creates pressure and blocks movement
+
+5. SUPPORT
+   - Low/medium direct damage
+   - Heals/buffs/debuffs
+   - Should be prioritized by player
+
+6. MAGIC / ELITE
+   - Special attacks
+   - Summoning
+   - Area attacks
+   - Higher HP
+
+7. SUMMON
+   - Created by Elite/Magic enemies
+   - Shorter HP
+   - High mobility or special attack
+
+============================================================
+4. MINECRAFT-INSPIRED ENEMIES
+============================================================
+
+A. PILLAGER
+Role:
+- Ranged DPS
+
+Minecraft reference:
+- HP: 24
+- Main weapon: Crossbow
+- Hard ranged damage: about 4.5 HP
+
+2D GAME DESIGN:
+- HP: 10
+- Damage: 2
+- Attack type: projectile
+- Range: long
+- Movement Speed: 70% of Player
+- Attack Cooldown: 1.8-2.5 sec
+- Projectile Speed: medium/high
+
+Behavior:
+- Keep distance from Player
+- Shoot projectile
+- Retreat when Player gets too close
+- Can move around obstacles if AI supports pathfinding
+
+Priority:
+- Medium
+
+Suggested implementation:
+Pillager = ranged enemy that makes the player move.
+
+------------------------------------------------------------
+
+B. VINDICATOR
+Role:
+- Melee DPS
+
+Minecraft reference:
+- HP: 24
+- Weapon: Iron Axe
+- Hard damage: about 19.5 HP
+
+2D GAME DESIGN:
+- HP: 10
+- Damage: 5
+- Attack type: melee
+- Range: short
+- Movement Speed: 115% of Player
+- Attack Cooldown: 1.0-1.5 sec
+
+Behavior:
+- Aggressively chase Player
+- High contact/attack damage
+- No ranged attack
+
+Priority:
+- HIGH
+
+Design purpose:
+- Punishes Player for standing still
+- Forces dodge/kite gameplay
+
+------------------------------------------------------------
+
+C. RAVAGER
+Role:
+- Tank / Heavy enemy
+
+Minecraft reference:
+- HP: 100
+- Hard melee damage: about 18
+- Roar damage: about 9
+- High knockback resistance
+
+2D GAME DESIGN:
+- HP: 40
+- Melee Damage: 5
+- Roar Damage: 3
+- Movement Speed: 55% of Player
+- Knockback Resistance: 75%
+- Attack Cooldown: 2.0 sec
+- Roar Cooldown: 6-10 sec
+
+Abilities:
+
+1. CHARGE
+   - Ravager moves rapidly toward Player
+   - On hit: damage + strong knockback
+   - Recommended charge damage: 5
+
+2. ROAR
+   - Short/medium area attack
+   - Damage: 3
+   - Strong knockback
+   - Cooldown: 6-10 sec
+
+Priority:
+- VERY HIGH
+
+Design purpose:
+- Tank enemy
+- Controls space
+- Punishes Player positioning
+
+------------------------------------------------------------
+
+D. WITCH
+Role:
+- Support / Debuffer
+
+Minecraft reference:
+- HP: 26
+- Uses Splash Potions
+- Supports Raiders with healing
+
+2D GAME DESIGN:
+- HP: 13
+- Direct Harming Damage: 3
+- Movement Speed: 75% of Player
+- Attack Cooldown: 3-4 sec
+
+WITCH POTIONS
+
+1. HARMING
+   - Instant damage
+   - Damage: 3 HP
+   - No damage-over-time
+
+2. POISON
+   - Damage over time
+   - Damage: 1 HP every 1.25 sec
+   - Recommended game duration: 5 sec
+   - Total maximum damage: 4 HP
+   - Does not need to kill Player directly
+
+3. SLOWNESS
+   - Movement speed: -15%
+   - Recommended game duration: 3-5 sec
+   - Example:
+     Base speed 100%
+     -> Player speed 85%
+
+4. WEAKNESS
+   - Player attack damage: -4
+   - Recommended duration: 5 sec
+
+5. REGENERATION (ALLY)
+   - Heals nearby Raider
+   - Recommended healing: +1 HP every 2.5 sec
+   - Maximum recommended duration: 5 sec
+   - Maximum heal per application: +2 HP
+
+6. INSTANT HEALTH (ALLY)
+   - Instant heal
+   - Recommended heal: +4 HP
+   - Target: damaged nearby Raider
+
+WITCH AI:
+- Avoid Player
+- Stay behind other enemies
+- Heal damaged elite/tank enemies
+- Debuff Player
+- Use Harming when appropriate
+- Do NOT constantly spam potions
+
+Priority:
+- VERY HIGH
+
+Design purpose:
+- Support enemy
+- Makes other enemies more dangerous
+- Encourages target prioritization
+
+------------------------------------------------------------
+
+E. EVOKER
+Role:
+- Magic / Elite / Summoner
+
+Minecraft reference:
+- HP: 24
+- Fang attack: about 6 HP
+- Can summon Vex
+
+2D GAME DESIGN:
+- HP: 15
+- Fang/AoE Damage: 3
+- Movement Speed: 65% of Player
+- Ability Cooldown: 5-8 sec
+
+ABILITY 1: MAGIC FANG
+- Spawn a short line/zone of magical spikes
+- Damage: 3 HP
+- Telegraph before attack: recommended 0.5-1 sec
+
+ABILITY 2: SUMMON VEX
+- Summon 1-3 Vex
+- Cooldown: 8-12 sec
+- Maximum active Vex per Evoker: recommended 3
+
+Priority:
+- EXTREMELY HIGH
+
+Design purpose:
+- Elite enemy
+- Forces Player to manage both Evoker and summons
+
+------------------------------------------------------------
+
+F. VEX
+Role:
+- Summoned melee enemy
+
+Minecraft reference:
+- Small flying hostile mob
+- Hard attack damage: about 13.5 HP
+
+2D GAME DESIGN:
+- HP: 5
+- Damage: 3
+- Movement Speed: 140% of Player
+- Attack Cooldown: 1.2 sec
+- Flying movement
+- Can pass through obstacles if desired
+
+Behavior:
+- Chase Player aggressively
+- Short attack range
+- Disappear after a limited lifetime
+
+Recommended lifetime:
+- 10-15 sec
+
+Priority:
+- HIGH when many Vex are active
+
+Design purpose:
+- Fast pressure unit
+- Makes Evoker dangerous
+
+============================================================
+5. ENEMY STAT SUMMARY
+============================================================
+
+PLAYER:
+HP = 20
+
+PILLAGER:
+HP = 10
+Damage = 2
+Role = Ranged
+
+VINDICATOR:
+HP = 10
+Damage = 5
+Role = Melee DPS
+
+RAVAGER:
+HP = 40
+Damage = 5
+Roar = 3
+Role = Tank
+
+WITCH:
+HP = 13
+Harming = 3
+Poison = 1 HP / 1.25 sec
+Slowness = -15% speed
+Weakness = -4 attack damage
+Regen = +1 HP / 2.5 sec
+Instant Health = +4 HP
+Role = Support
+
+EVOKER:
+HP = 15
+Fang = 3
+Role = Magic / Elite
+
+VEX:
+HP = 5
+Damage = 3
+Role = Summon
+
+============================================================
+6. HARD RAID WAVE REFERENCE
+============================================================
+
+BASE HARD WAVES:
+
+WAVE 1
+- Pillager x4
+- Total base enemies: 4
+
+WAVE 2
+- Pillager x3
+- Vindicator x2
+- Total base enemies: 5
+
+WAVE 3
+- Pillager x3
+- Ravager x1
+- Total base enemies: 4
+
+WAVE 4
+- Pillager x3
+- Witch x3
+- Total base enemies: 6
+
+WAVE 5
+- Vindicator x4
+- Ravager x1
+- Evoker x1
+- Ravager + Pillager rider combination
+- Total base raid units: about 7+
+
+WAVE 6
+- Pillager x5
+- Vindicator x2
+- Evoker x1
+- Total base enemies: 8
+
+WAVE 7
+- Vindicator x6
+- Witch x1
+- Evoker x2
+- Ravager combinations
+- Total base raid units: about 11+
+
+IMPORTANT:
+Minecraft Raid has random additional Raider spawns.
+The exact live number can therefore be higher than the base composition.
+
+For the 2D game:
+Use the listed numbers as DESIGN BASELINE.
+Do not use random spawning at first.
+Make the PBL version deterministic so it is easier to test.
+
+============================================================
+7. RECOMMENDED 2D WAVE SCALING
+============================================================
+
+PLAYER:
+20 HP
+
+WAVE 1:
+Pillager x4
+Difficulty: Tutorial
+Threat: Low
+
+WAVE 2:
+Pillager x3
+Vindicator x2
+Difficulty: Low-Medium
+
+WAVE 3:
+Pillager x3
+Ravager x1
+Difficulty: Medium
+
+WAVE 4:
+Pillager x3
+Witch x1-2
+Difficulty: Medium-High
+
+WAVE 5:
+Vindicator x4
+Ravager x1
+Evoker x1
+Difficulty: High
+
+WAVE 6:
+Pillager x5
+Vindicator x2
+Evoker x1
+Vex x2-3
+Difficulty: Very High
+
+WAVE 7:
+Vindicator x6
+Witch x1
+Evoker x2
+Ravager x1
+Vex x3-5
+Difficulty: Final Raid
+
+============================================================
+8. BOSS DESIGN
+============================================================
+
+Boss should NOT simply be a Ravager with more HP.
+
+Recommended:
+- Boss HP: 150-200
+- Multiple phases
+- Telegraph attacks
+- Area attacks
+- Summon minions
+- Enrage at 50% HP
+- Reward after defeat
+
+Example:
+BOSS HP = 180
+
+Phase 1:
+100%-70%
+- Melee
+- Charge
+
+Phase 2:
+70%-40%
+- Area attack
+- Summon enemies
+
+Phase 3:
+40%-0%
+- Faster attacks
+- More damage
+- Enrage
+- More summons
+
+============================================================
+9. DAMAGE RULES FOR A 20 HP PLAYER
+============================================================
+
+Recommended damage tiers:
+
+1 DAMAGE:
+- Very weak attack
+- Small projectile
+- Minor DoT tick
+
+2 DAMAGE:
+- Normal ranged attack
+- Basic enemy attack
+
+3 DAMAGE:
+- Strong ability
+- Witch Harming
+- Vex attack
+
+4 DAMAGE:
+- Elite attack
+- Strong special
+
+5 DAMAGE:
+- Vindicator / Ravager heavy attack
+- Dangerous melee
+
+8+ DAMAGE:
+- Boss ultimate
+- Should have a clear warning/telegraph
+
+Avoid attacks that instantly kill a 20 HP Player
+unless they are explicitly designed as dodgeable boss mechanics.
+
+============================================================
+10. COMBAT PRIORITY
+============================================================
+
+Recommended AI target priority:
+
+Witch
+    ↓
+Evoker
+    ↓
+Vex
+    ↓
+Vindicator
+    ↓
+Pillager
+    ↓
+Ravager
+
+However, Player should be able to choose freely.
+
+Reason:
+- Witch keeps enemies alive
+- Evoker creates Vex
+- Vex rapidly pressures Player
+- Vindicator deals heavy melee damage
+- Pillager creates ranged pressure
+- Ravager is slow but tanky
+
+============================================================
+11. SIMPLE C++/OOP DATA STRUCTURE
+============================================================
+
+Recommended enemy structure:
+
+Enemy
+- name
+- hp
+- maxHp
+- damage
+- speed
+- attackCooldown
+- enemyType
+- isAlive
+
+Player
+- hp
+- maxHp
+- speed
+- damage
+- weapon
+- skill
+
+Enemy types:
+- PILLAGER
+- VINDICATOR
+- RAVAGER
+- WITCH
+- EVOKER
+- VEX
+- BOSS
+
+Wave:
+- waveNumber
+- enemiesToSpawn
+- spawnDelay
+- isCompleted
+
+WaveManager:
+- currentWave
+- spawnEnemy()
+- startWave()
+- checkWaveComplete()
+- startNextWave()
+
+============================================================
+12. IMPORTANT BALANCING PRINCIPLE
+============================================================
+
+Minecraft values are REFERENCE values.
+
+The 2D game should use:
+- Player = 20 HP
+- Enemy values scaled around that HP
+- Difficulty increases through enemy combinations
+- Not only through enemy quantity
+
+Progression:
+Wave 1 = learn basic enemy
+Wave 2 = ranged + melee
+Wave 3 = tank introduced
+Wave 4 = support introduced
+Wave 5 = elite introduced
+Wave 6 = summon introduced
+Wave 7 = combined final encounter
+
+The goal is:
+Each wave introduces or combines a mechanic.
+The player should learn the mechanic before being forced
+to deal with several mechanics simultaneously.
+
+============================================================
+END
+============================================================

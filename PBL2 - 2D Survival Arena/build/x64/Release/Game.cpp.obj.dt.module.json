@@ -1,0 +1,14 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "D:\\Download\\PBL2 - 2D Survival Arena\\PBL2 - 2D Survival Arena\\build\\x64\\Release\\Game.obj",
+            "outputs": [
+                "D:\\Download\\PBL2 - 2D Survival Arena\\PBL2 - 2D Survival Arena\\build\\x64\\Release\\Game.cpp.obj.dt.module.json",
+                "D:\\Download\\PBL2 - 2D Survival Arena\\PBL2 - 2D Survival Arena\\build\\x64\\Release\\Game.cpp.obj.dt.d.json"
+            ],
+            "requires": []
+        }
+    ]
+}
