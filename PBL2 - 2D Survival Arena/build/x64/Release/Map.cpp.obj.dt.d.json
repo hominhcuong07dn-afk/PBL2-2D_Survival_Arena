@@ -3,7 +3,15 @@
     "Data": {
         "Source": "d:\\download\\pbl2 - 2d survival arena\\pbl2 - 2d survival arena\\map.cpp",
         "ProvidedModule": "",
-        "Includes": [],
+        "Includes": [
+            "d:\\download\\pbl2 - 2d survival arena\\pbl2 - 2d survival arena\\map.h",
+            "d:\\download\\pbl2 - 2d survival arena\\include\\raylib.h",
+            "c:\\program files\\microsoft visual studio\\18\\community\\vc\\tools\\msvc\\14.51.36231\\include\\stdarg.h",
+            "c:\\program files\\microsoft visual studio\\18\\community\\vc\\tools\\msvc\\14.51.36231\\include\\vcruntime.h",
+            "c:\\program files\\microsoft visual studio\\18\\community\\vc\\tools\\msvc\\14.51.36231\\include\\sal.h",
+            "c:\\program files\\microsoft visual studio\\18\\community\\vc\\tools\\msvc\\14.51.36231\\include\\concurrencysal.h",
+            "c:\\program files\\microsoft visual studio\\18\\community\\vc\\tools\\msvc\\14.51.36231\\include\\vadefs.h"
+        ],
         "ImportedModules": [],
         "ImportedHeaderUnits": []
     }

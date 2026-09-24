@@ -1,9 +1,10 @@
 #include "Game.h"
 
 Game::Game(int width, int height)
-    : screenWidth(width),                           //Player khoi tao chinh giua man hinh
+    :screenWidth(width),
     screenHeight(height),
-    player(Vector2{ width / 2.0f, height / 2.0f })
+    player(Vector2{ width / 2.0f,height / 2.0f }),
+    map(width, height, 64)
 {
 }
 
@@ -20,9 +21,19 @@ void Game::Draw()
 {
     BeginDrawing();
 
-    ClearBackground(RAYWHITE);
+    map.Draw();
+
     player.Draw();
-    DrawText("SURVIVAL ARENA",20, 20, 30, BLACK);
+
+    DrawText("SURVIVAL ARENA", 20, 20, 30, WHITE);
+
+    DrawText(
+        TextFormat("HP: %d/%d", player.GetHP(), player.GetMaxHP()),
+        20,
+        60,
+        25,
+        WHITE
+    );
 
     EndDrawing();
 }

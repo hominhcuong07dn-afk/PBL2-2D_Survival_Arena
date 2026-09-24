@@ -72,12 +72,12 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>D:\Download\PBL2 - 2D Survival Arena\include;$(IncludePath)</IncludePath>
-    <OutDir>.</OutDir>
+    <OutDir>D:\Download\PBL2 - 2D Survival Arena\PBL2 - 2D Survival Arena</OutDir>
     <IntDir>$(ProjectDir)build\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <IncludePath>D:\Download\PBL2 - 2D Survival Arena\include;$(IncludePath)</IncludePath>
-    <OutDir>.</OutDir>
+    <OutDir>D:\Download\PBL2 - 2D Survival Arena\PBL2 - 2D Survival Arena</OutDir>
     <IntDir>$(ProjectDir)build\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -161,6 +161,8 @@ shell32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="EnemyType.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Map.cpp" />
@@ -168,6 +170,8 @@ shell32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     <ClCompile Include="Player.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Enemy.h" />
+    <ClInclude Include="EnemyType.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Map.h" />
   </ItemGroup>

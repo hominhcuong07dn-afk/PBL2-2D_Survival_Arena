@@ -15,7 +15,8 @@
             "d:\\download\\pbl2 - 2d survival arena\\include\\raymath.h",
             "c:\\program files (x86)\\windows kits\\10\\include\\10.0.26100.0\\ucrt\\math.h",
             "c:\\program files (x86)\\windows kits\\10\\include\\10.0.26100.0\\ucrt\\corecrt_math.h",
-            "c:\\program files (x86)\\windows kits\\10\\include\\10.0.26100.0\\ucrt\\corecrt.h"
+            "c:\\program files (x86)\\windows kits\\10\\include\\10.0.26100.0\\ucrt\\corecrt.h",
+            "d:\\download\\pbl2 - 2d survival arena\\pbl2 - 2d survival arena\\map.h"
         ],
         "ImportedModules": [],
         "ImportedHeaderUnits": []
